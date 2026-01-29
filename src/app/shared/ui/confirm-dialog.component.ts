@@ -24,8 +24,6 @@ export interface ConfirmDialogData {
       <button mat-button (click)="close(false)">
         {{ data.cancelText ?? 'Cancel' }}
       </button>
-      <button mat-raised-button color="warn" [mat-dialog-close]="true">
-        {{ data.confirmText ?? 'Delete' }}
       <button mat-raised-button color="warn" (click)="close(true)">
         {{ data.confirmText ?? 'Confirm' }}
       </button>
