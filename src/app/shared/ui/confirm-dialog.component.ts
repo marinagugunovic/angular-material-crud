@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 export interface ConfirmDialogData {
@@ -21,15 +21,24 @@ export interface ConfirmDialogData {
     </div>
 
     <div mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close="false">
+      <button mat-button (click)="close(false)">
         {{ data.cancelText ?? 'Cancel' }}
       </button>
       <button mat-raised-button color="warn" [mat-dialog-close]="true">
         {{ data.confirmText ?? 'Delete' }}
+      <button mat-raised-button color="warn" (click)="close(true)">
+        {{ data.confirmText ?? 'Confirm' }}
       </button>
     </div>
   `,
 })
 export class ConfirmDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: ConfirmDialogData) {}
+  constructor(
+    private readonly dialogRef: MatDialogRef<ConfirmDialogComponent, boolean>,
+    @Inject(MAT_DIALOG_DATA) public readonly data: ConfirmDialogData
+  ) {}
+
+  close(value: boolean): void {
+    this.dialogRef.close(value);
+  }
 }

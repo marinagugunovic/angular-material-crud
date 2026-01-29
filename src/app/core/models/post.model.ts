@@ -6,3 +6,9 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface PostUpsert {
+  title: string;
+  body: string;
+  author: string;
+}
